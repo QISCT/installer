@@ -12,6 +12,7 @@
     "inquirer": "^8.1.5",
     "node-fetch": "^2.6.2",
     "octokit": "^1.7.1",
+    "open": "^8.4.0",
     "shelljs": "^0.8.4"
   }
 }
