@@ -78,6 +78,4 @@ export default async function () {
   } = await octokit.request("GET /user");
 
   await writeComposerAuth();
-
-  await execPromise(`composer i`);
 }

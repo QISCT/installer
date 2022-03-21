@@ -27,7 +27,7 @@ const askProjectDescription = () => {
 }
 
 const resolveSymfonyVersion = async () => {
-    let symfonyVersion = '~' + (await symfonyLatest).data.tag_name.slice(1)
+    let symfonyVersion = '~' + (await symfonyLatest).data.tag_name.slice(1).split(".", 2).join(".")
     return prompt.ask({
         type: "input",
         default: symfonyVersion,
