@@ -1,5 +1,5 @@
 import prompt from './prompt/index.js';
-import fs from 'fs';
+import { writeFileSync, readFileSync } from "fs";
 import path, { dirname } from 'path';
 import process from 'process';
 import fetch from 'node-fetch';
@@ -45,7 +45,7 @@ const resolveVersion = async () => {
 const basePackages = async() => {
     let symfonyVersion = await resolveSymfonyVersion();
     try {
-        const json = fs.readFileSync(rootDir + '/resources/default.json', 'utf8').replaceAll('<symfonyVersion>', symfonyVersion);
+        const json = readFileSync(rootDir + '/resources/default.json', 'utf8').replaceAll('<symfonyVersion>', symfonyVersion);
         return JSON.parse(json);
     } catch (err) {
         console.error(err)
@@ -123,7 +123,7 @@ const addPackagePrompt = async (search) => {
 }
 
 const writeConfig = () => {
-    fs.writeFileSync(
+    writeFileSync(
         process.cwd() + '/composer.json',
         buildConfig(),
         err => console.error(err)
@@ -135,7 +135,7 @@ const buildConfig = () => {
     config.packages = Object.assign(config.basePackages, config.privatePackages, config.externalPackages);
     let composerConfig = '';
     try {
-        composerConfig += fs.readFileSync(rootDir + '/resources/base.json', 'utf8');
+        composerConfig += readFileSync(rootDir + '/resources/base.json', 'utf8');
     } catch (err) {
         console.error(err)
     }
